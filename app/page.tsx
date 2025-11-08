@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Header from "./components/Header";
+import FaveAlbum from "./components/FaveAlbum";
 
 export default function Home() {
 
 	return (
 		<main id="top" className="h-full w-full">
 			<Header></Header>
+      <FaveAlbum />
 		</main>
 	);
 

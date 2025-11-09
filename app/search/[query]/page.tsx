@@ -21,7 +21,7 @@ export default function SearchResultsRouteRoot({ params }: SearchResultsRouteRoo
     const [body, setBody] = useState<React.ReactNode>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const decodedQuery = resolvedParams?.query.replaceAll('%20', ' ');
+    const decodedQuery = decodeURIComponent(resolvedParams.query);
 
     useEffect(() => {
         if (!resolvedParams?.query) return;

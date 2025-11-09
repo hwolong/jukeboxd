@@ -11,9 +11,9 @@ export default function Review({albumName, artistName, stars, reviewBody, id}: R
     return (
         <div className="bg-(--color-off-white) rounded-3xl p-6 w-full shadow-lg flex flex-row my-2">
             <div>
-                <div className="flex flex-row items-end h-lh">
-                        <h3 className="text-lg font-bold text-(--color-dark) h-fit">{albumName}</h3>
-                        <p className="text-sm text-(--color-main) font-semibold ml-4 h-full">{artistName}</p>
+                <div className="flex flex-row items-center gap-2 flex-wrap">
+                        <h3 className="text-lg font-bold text-(--color-dark)">{albumName}</h3>
+                        <p className="text-sm text-(--color-main) font-semibold">{artistName}</p>
                 </div>
                 <p>{(() => {
                     switch (stars) {

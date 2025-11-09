@@ -14,11 +14,11 @@ export default function Header() {
 
     return (
         <header className="h-12 w-full bg-(--color-main) flex items-center p-2 text-white">
-            <a className="text-lg font-bold flex-1 text-white" href="/">Jukeboxd</a>
+            <a className="text-lg font-bold flex-1 text-white hidden sm:block" href="/">Jukeboxd</a>
             <FlexSpace></FlexSpace>
             <SearchBar submitHandler={searchBarHandler} hint="Search for an Album"></SearchBar>
             <FlexSpace></FlexSpace>
-            <p className="font-medium text-lg flex-1 text-right">A community music board</p>
+            <p className="font-medium text-lg flex-1 text-right hidden sm:block">A community music board</p>
         </header>   
     );
 }

@@ -38,24 +38,24 @@ export default function AlbumDetails( {apiInfo} : albumDetailsProps) {
 
     return (
         <>
-            <div className="flex flex-row items-center justify-center gap-4 w-3/4 mx-auto max-h-3/5">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-3/4 mx-auto sm:max-h-3/5">
                 {apiInfo.coverArt.images && (
                     <img className="rounded-3xl pt-4 pr-2 pl-2 max-h-full" src={apiInfo.coverArt.images[0].image} alt={`${apiInfo.releaseGroup.title} cover art`} />
                 )}
                 <div>
-                <h1 className="text-xl font-bold">{sortArtists(apiInfo.artist.artists)}</h1>
-                <h3 className="text-xl font-bold italic">{apiInfo.releaseGroup.title}</h3>
-                <h3 className="text-lg">Released {apiInfo.releaseGroup['first-release-date']}</h3>
-                <br></br>
-                {avgRating !== undefined ? (
-                    avgRating !== null ? (
-                        <h4>Average rating: {(avgRating / 2).toFixed(2)}/5</h4>
+                    <h1 className="text-xl font-bold">{sortArtists(apiInfo.artist.artists)}</h1>
+                    <h3 className="text-xl font-bold italic">{apiInfo.releaseGroup.title}</h3>
+                    <h3 className="text-lg">Released {apiInfo.releaseGroup['first-release-date']}</h3>
+                    <br></br>
+                    {avgRating !== undefined ? (
+                        avgRating !== null ? (
+                            <h4>Average rating: {(avgRating / 2).toFixed(2)}/5</h4>
+                        ) : (
+                            <h4>No ratings yet.</h4>
+                        )
                     ) : (
-                        <h4>No ratings yet.</h4>
-                    )
-                ) : (
-                    <h4>Loading rating...</h4>
-                )}
+                        <h4>Loading rating...</h4>
+                    )}
                 <CommentBox mbid={apiInfo.releaseGroup.id} />
                 </div>
             </div>

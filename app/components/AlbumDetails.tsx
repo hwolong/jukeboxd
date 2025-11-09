@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ApiInfo } from '../api_access';
 import CommentBox from './CommentBox';
-import { createClient } from '@supabase/supabase-js'
-const supabaseUrl = 'https://hoihxvixsnpaffkaketj.supabase.co'
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? '';
-if (!supabaseKey) {
-    throw new Error('SUPABASE_KEY environment variable is not set');
-}
-const supabase = createClient(supabaseUrl, supabaseKey)
+import { getAverageRating } from '../api_access';
 
 interface albumDetailsProps {
     apiInfo: ApiInfo
@@ -22,22 +16,6 @@ function sortArtists(artists: Array<{ name: string }>){
     } else {
         return artists[0].name;
     }
-}
-
-async function getAverageRating(mbid: string) {
-    const { data, error } = await supabase
-        .from('Reviews')
-        .select('stars')
-        .eq('mbid', mbid);
-    if (error) {
-        console.error('Error fetching ratings:', error);
-        return null;
-    }
-    if (data && data.length > 0) {
-        const totalStars = data.reduce((sum, review) => sum + review.stars, 0);
-        return totalStars / data.length;
-    }
-    return null;
 }
 
 export default function AlbumDetails( {apiInfo} : albumDetailsProps) {

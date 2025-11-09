@@ -1,5 +1,13 @@
 import { MusicBrainzApi, CoverArtArchiveApi, IReleaseGroup, IBrowseReleasesResult, IRelease, IBrowseArtistsResult, ICoversInfo } from "musicbrainz-api"
 
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://hoihxvixsnpaffkaketj.supabase.co'
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? '';
+if (!supabaseKey) {
+    throw new Error('SUPABASE_KEY environment variable is not set');
+}
+const supabase = createClient(supabaseUrl, supabaseKey)
+
 export interface ApiInfo {
     releaseGroup: IReleaseGroup;
     releases: IBrowseReleasesResult;
@@ -69,4 +77,48 @@ export async function getInfo({ mbid }: { mbid: string }) {
         console.error(error);
         return null;
     }
+}
+
+export async function addReview(mbid: string, event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const comment = formData.get("comment");
+    const rating = formData.get("rating");
+    const albumInfo = await getInfo({ mbid });
+    console.log(albumInfo);
+    console.log(`Submitting comment for MBID ${mbid}: ${comment} with rating ${rating}`);
+    const { data, error } = await supabase
+        .from('Reviews')
+        .insert([
+            {
+                mbid: mbid,
+                artist: albumInfo?.artist.artists.map(artist => artist.name).join(", ") ?? "",
+                album: albumInfo?.primaryRelease?.title ?? "",
+                stars: rating,
+                review: comment as string,
+            },
+        ]);
+    if (error) {
+        console.error('Error submitting comment:', error);
+    } else {
+        console.log('Comment submitted successfully:', data);
+        document.getElementById("submit-button")!.innerHTML = "Submitted!";
+        document.getElementById("submit-button")?.setAttribute("disabled", "true");
+    }
+}
+
+export async function getAverageRating(mbid: string) {
+    const { data, error } = await supabase
+        .from('Reviews')
+        .select('stars')
+        .eq('mbid', mbid);
+    if (error) {
+        console.error('Error fetching ratings:', error);
+        return null;
+    }
+    if (data && data.length > 0) {
+        const totalStars = data.reduce((sum, review) => sum + review.stars, 0);
+        return totalStars / data.length;
+    }
+    return null;
 }

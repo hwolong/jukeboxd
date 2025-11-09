@@ -1,36 +1,9 @@
-import { createClient } from '@supabase/supabase-js'
-const supabaseUrl = 'https://hoihxvixsnpaffkaketj.supabase.co'
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? '';
-if (!supabaseKey) {
-    throw new Error('SUPABASE_KEY environment variable is not set');
-}
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-
-async function submitComment(mbid: string, event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const comment = formData.get("comment");
-    const rating = formData.get("rating");
-    console.log(`Submitting comment for MBID ${mbid}: ${comment} with rating ${rating}`);
-    const { data, error } = await supabase
-        .from('Reviews')
-        .insert([
-            { mbid: mbid, stars: rating, review: comment as string},
-        ]);
-    if (error) {
-        console.error('Error submitting comment:', error);
-    } else {
-        console.log('Comment submitted successfully:', data);
-        document.getElementById("submit-button")!.innerHTML = "Submitted!";
-        document.getElementById("submit-button")?.setAttribute("disabled", "true");
-    }
-}
+import { addReview } from "../api_access";
 
 export default function CommentBox({mbid}: {mbid: string}) {
     return (
         <div>
-            <form onSubmit={(event) => submitComment(mbid, event)}>
+            <form onSubmit={(event) => addReview(mbid, event)}>
                 <label htmlFor="rating" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your rating</label>
                 <select name="rating" className="mb-2 p-2 border rounded-md">
                     <option value="10">★★★★★</option>

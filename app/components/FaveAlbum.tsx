@@ -9,20 +9,19 @@ const mbApi = new MusicBrainzApi({
 });
 
 async function makeAlbum({ mbid }: { mbid: string }) {
-    try {
-        const release = await getInfo({ mbid });
-        console.log(release);
-        return (
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", marginBottom: "20px" }}>
-                <h1>{release.releaseGroup.title}</h1>
-                <img style={{ maxWidth: "500px", borderRadius: "20px", padding: "10px" }} src={release.coverArt.images[0].image} alt={`${release.releaseGroup.title} cover art`} />
-                <h3><b>Artist:</b> {release.artist.artists.map(artist => artist.name).join(", ")}</h3>
-                <h3><b>Release date:</b> {release.releaseGroup["first-release-date"]}</h3>
-            </div>
-        );
-    } catch (error) {
-        return <p>Error fetching album</p>;
+    const release = await getInfo({ mbid });
+    if (!release) {
+        throw "getInfo Failed";
     }
+    console.log(release);
+    return (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", marginBottom: "20px" }}>
+            <h1>{release.releaseGroup.title}</h1>
+            <img style={{ maxWidth: "500px", borderRadius: "20px", padding: "10px" }} src={release.coverArt.images[0].image} alt={`${release.releaseGroup.title} cover art`} />
+            <h3><b>Artist:</b> {release.artist.artists.map(artist => artist.name).join(", ")}</h3>
+            <h3><b>Release date:</b> {release.releaseGroup["first-release-date"]}</h3>
+        </div>
+    );
 }
 
 export default function FaveAlbum({ mbid }: { mbid: string }) {

@@ -59,5 +59,6 @@ export async function getInfo({ mbid }: { mbid: string }) {
         return { releaseGroup, releases, primaryRelease, artist, coverArt };
     } catch (error) {
         console.error(error);
+        return null;
     }
 }

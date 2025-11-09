@@ -1,10 +1,36 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('/fonts/Ubuntu-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('/fonts/Ubuntu-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('/fonts/Ubuntu-Italic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('/fonts/Ubuntu-BoldItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 700;
+}
+
 :root, body {
   margin: 0;
   height: 100vh;
   width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
   --color-dark: #1a1a1a; /* Deep charcoal for backgrounds */
   --color-off-white: #f5f5f0; /* Soft off-white for text or highlights */
   --color-main: #4a90e2; /* Vibrant blue for accents */

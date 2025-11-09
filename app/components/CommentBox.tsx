@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = 'https://hoihxvixsnpaffkaketj.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY ?? '';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? '';
 if (!supabaseKey) {
     throw new Error('SUPABASE_KEY environment variable is not set');
 }
@@ -16,7 +16,7 @@ function submitComment(mbid: string, event: React.FormEvent<HTMLFormElement>) {
     const { data, error } = supabase
         .from('Reviews')
         .insert([
-            { mbid: mbid, stars: rating as number, review: comment as string },
+            { mbid: mbid, stars: rating, review: comment},
         ]);
     if (error) {
         console.error('Error submitting comment:', error);

@@ -1,4 +1,12 @@
-import { MusicBrainzApi, CoverArtArchiveApi } from "musicbrainz-api"
+import { MusicBrainzApi, CoverArtArchiveApi, IReleaseGroup, IBrowseReleasesResult, IRelease, IBrowseArtistsResult, ICoversInfo } from "musicbrainz-api"
+
+interface ApiInfo {
+    releaseGroup: IReleaseGroup;
+    releases: IBrowseReleasesResult;
+    primaryRelease: IRelease;
+    artist: IBrowseArtistsResult;
+    coverArt: ICoversInfo;
+}
 
 const mbApi = new MusicBrainzApi({
     appName: 'Jukeboxd',
@@ -56,7 +64,7 @@ export async function getInfo({ mbid }: { mbid: string }) {
         const artist = await mbApi.browse('artist', { 'release-group': mbid });
         const primaryRelease = releases.releases.find(r => (r.date == releaseGroup["first-release-date"]) && r["cover-art-archive"].front) || releases.releases[0];
         const coverArt = await caaApi.getReleaseCovers(primaryRelease.id);
-        return { releaseGroup, releases, primaryRelease, artist, coverArt };
+        return { releaseGroup, releases, primaryRelease, artist, coverArt } as ApiInfo;
     } catch (error) {
         console.error(error);
         return null;

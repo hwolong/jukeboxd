@@ -1,36 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jukeboxd
+## A collaborative album rating board
 
-## Getting Started
+This project was born out of a desire to create an equivalent of Letterboxd, a social network which allows users to rate and review movies, for music. Though the scope of the project changed throughout the previous 24 hours, we were ultimately able to create a social network allowing users to rate and review albums while sharing their opinions to a wider audience.
 
-First, run the development server:
+Jukeboxd allows users to search up albums and leave ratings on a five-star scale along with written reviews. After the reviews are posted, they are visible to all users both on the page for the album and on the homepage where all reviews are posted, with the most recent reviews visible first. All reviews are anonymous, eliminating the need for an account system.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The frontend of the project is written in Next.js, the massive database of albums comes from the MusicBrainz API, and the reviews are stored in a Supabase backend. Throughout this project, we learned a great deal about integrating APIs with a website as well as how to use databases to our advantage.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+We believe that this will be a fun applet for small communities and hope to make it available to the hackers so they can share what they've been listening to while coding hard, as well as judge each other's tastes.

@@ -40,7 +40,7 @@ export default function AlbumDetailsRouteRoot({params, apiInfo}: AlbumDetailsRou
     }
 
     return (
-        <main id="top" className="h-full w-full font font-['Ubuntu',sans-serif]">
+        <main id="top" className="flex flex-col h-full w-full font font-['Ubuntu',sans-serif]">
             <Header></Header>
             {body}
         </main>

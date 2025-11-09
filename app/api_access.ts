@@ -138,3 +138,20 @@ export async function getReviews() {
     }
     return null;
 }
+
+export async function getReviewsForRG(mbid: string) {
+    const {data, error} = await supabase
+        .from("Reviews")
+        .select()
+        .eq("mbid", mbid)
+        .order("created_at", {ascending: false, nullsFirst: false})
+        .limit(100);
+    if (error) {
+        console.error('Error fetching reviews:', error);
+        return null;
+    }
+    if (data) {
+        return data
+    }
+    return null;
+}

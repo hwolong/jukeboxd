@@ -7,7 +7,7 @@ import ReviewTimeline from "./components/ReviewTimeline";
 export default function Home() {
 
 	return (
-		<main id="top" className="h-full w-full font font-['Ubuntu',sans-serif] flex flex-col">
+		<main id="top" className="flex flex-col h-full w-full font font-['Ubuntu',sans-serif]">
 			<Header></Header>
 			<h1 className="text-3xl font-bold text-center my-4">Latest Reviews:</h1>
 			{/* <FaveAlbumHolder mbids={["271faeb3-fdd1-3ebb-80aa-97b3116e9341", "edc8b011-6294-48b6-b064-67dfd1712c1b", "787dc5d8-8a38-4a1c-b9f1-9edf7bcd653d", "a5418947-d829-456a-be4e-d29ba8c2a785"]} /> */}

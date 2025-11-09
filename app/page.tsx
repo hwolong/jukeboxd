@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Header from "./components/Header";
 import FaveAlbum from "./components/FaveAlbum";
+import FaveAlbumHolder from "./components/FaveAlbumHolder";
 
 export default function Home() {
 
@@ -8,8 +9,7 @@ export default function Home() {
 		<main id="top" className="h-full w-full font font-['Ubuntu',sans-serif]">
 			<Header></Header>
 			<h1>Favorite albums</h1>
-			<FaveAlbum mbid="271faeb3-fdd1-3ebb-80aa-97b3116e9341" />
-			<FaveAlbum mbid="edc8b011-6294-48b6-b064-67dfd1712c1b" />
+			<FaveAlbumHolder mbids={["271faeb3-fdd1-3ebb-80aa-97b3116e9341", "edc8b011-6294-48b6-b064-67dfd1712c1b"]} />
 		</main>
 	);
 

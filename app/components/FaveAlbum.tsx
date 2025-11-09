@@ -15,10 +15,10 @@ async function makeAlbum({ mbid }: { mbid: string }) {
     }
     console.log(release);
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", marginBottom: "20px" }}>
+        <div className="flex flex-col items-center justify-center gap-4 border">
             <h1>{release.releaseGroup.title}</h1>
-            <img style={{ maxWidth: "500px", borderRadius: "20px", padding: "10px" }} src={release.coverArt.images[0].image} alt={`${release.releaseGroup.title} cover art`} />
-            <h3><b>Artist:</b> {release.artist.artists.map(artist => artist.name).join(", ")}</h3>
+            <img className="max-w-xs rounded-lg p-2" src={release.coverArt.images[0].image} alt={`${release.releaseGroup.title} cover art`} />
+            <h3>{release.artist.artists.length > 1 ? <b>Artists:</b> : <b>Artist:</b>} {release.artist.artists.map(artist => artist.name).join(", ")}</h3>
             <h3><b>Release date:</b> {release.releaseGroup["first-release-date"]}</h3>
         </div>
     );

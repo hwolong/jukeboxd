@@ -122,3 +122,19 @@ export async function getAverageRating(mbid: string) {
     }
     return null;
 }
+
+export async function getReviews() {
+    const {data, error} = await supabase
+        .from("Reviews")
+        .select()
+        .order("created_at", {ascending: false, nullsFirst: false})
+        .limit(10);
+    if (error) {
+        console.error('Error fetching reviews:', error);
+        return null;
+    }
+    if (data) {
+        return data
+    }
+    return null;
+}

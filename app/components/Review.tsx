@@ -3,11 +3,12 @@ interface ReviewProps {
     artistName: string;
     reviewBody: string;
     id: string;
+    key?: number
 }
 
 export default function Review({albumName, artistName, reviewBody, id}: ReviewProps) {
     return (
-        <div className="bg-(--color-off-white) rounded-3xl p-6 w-full shadow-lg flex flex-row">
+        <div className="bg-(--color-off-white) rounded-3xl p-6 w-full shadow-lg flex flex-row my-2">
             <div>
                 <div className="flex flex-row items-end h-lh">
                         <h3 className="text-lg font-bold text-(--color-dark) h-fit">{albumName}</h3>

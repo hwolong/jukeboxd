@@ -1,20 +1,18 @@
+import { getReviews } from "../api_access";
 import Review from "./Review";
 
 export default async function ReviewTimeline() {
     
+    const lastTenReviews = await getReviews();
 
     return (
         <div className="flex flex-row grow mx-8 mb-8">
             <div className="grow"></div>
             <section id="new_reviews" className="flex flex-col items-start w-9/10 md:w-4/5">
-                <Review 
-                    albumName="The Dark Side of the Moon" 
-                    artistName="Pink Floyd" 
-                    reviewBody="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-                    id="bang"
-                />
+                {lastTenReviews ? lastTenReviews.map((r, i) => <Review albumName={r.album || "Unknown Album"} artistName={r.artist || "Unknown Artist"} reviewBody={r.review || "No Review Text"} id={r.mbid} key={i}></Review>) : <p>Loading Reviews Failed.</p>}
             </section>
-            <div className="grow"></div>
+            <div className="grow">
+            </div>
         </div>
     ); 
 }

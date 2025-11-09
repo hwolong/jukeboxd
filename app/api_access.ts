@@ -1,6 +1,6 @@
 import { MusicBrainzApi, CoverArtArchiveApi, IReleaseGroup, IBrowseReleasesResult, IRelease, IBrowseArtistsResult, ICoversInfo } from "musicbrainz-api"
 
-interface ApiInfo {
+ export interface ApiInfo {
     releaseGroup: IReleaseGroup;
     releases: IBrowseReleasesResult;
     primaryRelease: IRelease;

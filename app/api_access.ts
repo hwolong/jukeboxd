@@ -1,9 +1,12 @@
 import { MusicBrainzApi, CoverArtArchiveApi, IReleaseGroup, IBrowseReleasesResult, IRelease, IBrowseArtistsResult, ICoversInfo } from "musicbrainz-api"
 
 import { createClient } from '@supabase/supabase-js'
-const supabaseUrl = 'https://hoihxvixsnpaffkaketj.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvaWh4dml4c25wYWZma2FrZXRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI2MjcyMzIsImV4cCI6MjA3ODIwMzIzMn0.Zr9hY3cFKdZgoTl98aL_CLbCORrS1Hk6LODSqFBYzyY';
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseUrl = 'https://hoihxvixsnpaffkaketj.supabase.co'
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? '';
+if (!supabaseKey) {
+    throw new Error('SUPABASE_KEY environment variable is not set');
+}
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 export interface ApiInfo {
     releaseGroup: IReleaseGroup;

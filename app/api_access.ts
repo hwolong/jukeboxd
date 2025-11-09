@@ -34,26 +34,6 @@ export async function getReleaseGroup({ mbid }: { mbid: string }) {
     }
 }
 
-async function getReleases({ mbid }: { mbid: string }) {
-    try {
-        console.log(`Fetching releases for release group MBID: ${mbid}`);
-        const releases = await mbApi.browse('release', { 'release-group': mbid });
-        return releases;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-async function getArtist({ mbid }: { mbid: string }) {
-    try {
-        console.log(`Fetching artists for release group MBID: ${mbid}`);
-        const artist = await mbApi.browse('artist', { 'release-group': mbid });
-        return artist;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 async function getCoverArt({ mbid }: { mbid: string }) {
     try {
         console.log(`Fetching cover art for release MBID: ${mbid}`);
@@ -67,12 +47,14 @@ async function getCoverArt({ mbid }: { mbid: string }) {
 export async function getInfo({ mbid }: { mbid: string }) {
     try {
         console.log(`Fetching release group with MBID: ${mbid}`);
-        const releaseGroup = await mbApi.lookup('release-group', mbid);
-        const releases = await mbApi.browse('release', { 'release-group': mbid });
-        const artist = await mbApi.browse('artist', { 'release-group': mbid });
-        const primaryRelease = releases.releases.find(r => (r.date == releaseGroup["first-release-date"]) && r["cover-art-archive"].front) || releases.releases[0];
-        const coverArt = await caaApi.getReleaseCovers(primaryRelease.id);
-        return { releaseGroup, releases, primaryRelease, artist, coverArt } as ApiInfo;
+        const response = await fetch(`/api/musicbrainz?mbid=${mbid}`);
+        
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+        
+        const data: ApiInfo = await response.json();
+        return data;
     } catch (error) {
         console.error(error);
         return null;

@@ -17,9 +17,9 @@ export default function Header() {
             <nav className="flex w-full items-center">
                 <SearchBar submitHandler={searchBarHandler}></SearchBar>
                 <FlexSpace></FlexSpace>
-                <div className="self-end">
+                {/* <div className="self-end">
                     {linksRight.map((x, idx) => <a key={idx} href={x[1]} className="mx-2">{x[0]}</a>)}
-                </div>
+                </div> */}
             </nav>
         </header>
     );

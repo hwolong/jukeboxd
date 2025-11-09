@@ -86,6 +86,9 @@ export async function addReview(mbid: string, event: React.FormEvent<HTMLFormEle
         console.log('Comment submitted successfully:', data);
         document.getElementById("submit-button")!.innerHTML = "Submitted!";
         document.getElementById("submit-button")?.setAttribute("disabled", "true");
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 250);
     }
 }
 
@@ -110,7 +113,7 @@ export async function getReviews() {
         .from("Reviews")
         .select()
         .order("created_at", {ascending: false, nullsFirst: false})
-        .limit(10);
+        .limit(250);
     if (error) {
         console.error('Error fetching reviews:', error);
         return null;

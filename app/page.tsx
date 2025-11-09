@@ -4,6 +4,8 @@ import FaveAlbum from "./components/FaveAlbum";
 import FaveAlbumHolder from "./components/FaveAlbumHolder";
 import ReviewTimeline from "./components/ReviewTimeline";
 
+export const revalidate = 5;
+
 export default function Home() {
 
 	return (
